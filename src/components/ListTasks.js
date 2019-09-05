@@ -1,18 +1,24 @@
 import React from 'react'
-import { List, Row } from 'antd';
+import { List, Row, Statistic } from 'antd';
 import { AppText } from './AppText';
+import { useTimer, useDate } from '../hooks'
+
+const { Countdown } = Statistic
 
 export const ListTasks = ({dataSource, history}) => {
+  
   return (
     <List
-      dataSource={dataSource}
-      itemLayout="horizontal"
-      renderItem={item => <ListItem {...item} history={history} />}
+    dataSource={dataSource}
+    itemLayout="horizontal"
+    renderItem={item => <ListItem {...item} history={history} />}
     />
-  )
-}
-
-const ListItem = ({ id, number, name, history }) => {
+    )
+  }
+  
+  const ListItem = ({ id, number, name, history }) => {
+    const timer = useTimer("2019-09-07T09:36:42.533Z")
+    const { fullDate }  = useDate("2019-09-07T09:36:42.533Z")
   
   
   return (
@@ -34,7 +40,7 @@ const ListItem = ({ id, number, name, history }) => {
             icon="calendar"
             styles={{marginRight: 24}}
           >
-            data
+            {fullDate}
           </AppText>
           <AppText icon="number">
             {number}
@@ -50,7 +56,7 @@ const ListItem = ({ id, number, name, history }) => {
           Неполадки с ОДПУ
         </AppText>
         <AppText icon="timer" styles={{marginRight: 'auto'}}>
-          Осталось: 14д 12ч
+          {timer}
         </AppText>
         <AppText styles={{marginRight: 24}}>
           ВКТ-1234567
